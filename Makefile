@@ -1,5 +1,6 @@
 all:
 	make clean
+	make prepare
 	make compile
 	make tests
 
@@ -14,3 +15,7 @@ tests:
 
 install:
 	cp build/horizon /usr/local/bin/
+
+prepare:
+	chmod +x scripts/compile
+	chmod +x scripts/tests
