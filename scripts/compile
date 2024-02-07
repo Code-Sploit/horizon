@@ -2,13 +2,11 @@
 
 clear
 
-files=`ls ./*.c`
-
-rm -rf build
+files=`ls src/*.c`
 
 echo "Creating build directory..."
 
-mkdir -p build
+mkdir -p build/src
 
 echo "Compiling src tree..."
 
@@ -21,12 +19,4 @@ done
 
 echo "Linking executable..."
 
-gcc -g build/* -o horizon
-
-echo -e "Running executable on tests...\n"
-
-./horizon hello.hrz
-
-echo -e "\nRunning compiled file..."
-
-./runasm
+gcc -g build/src/* -o build/horizon

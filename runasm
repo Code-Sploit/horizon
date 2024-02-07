@@ -1,7 +1,0 @@
-#!/bin/bash
-
-nasm -f elf64 hello.s -o build/hello.o
-
-ld build/hello.o -o hello
-
-./hello

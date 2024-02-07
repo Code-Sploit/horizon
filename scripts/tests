@@ -1,0 +1,5 @@
+#!/bin/bash
+
+./horizon hello.hrz
+
+echo "Tests returned: $?"
