@@ -1,0 +1,9 @@
+?require builtin
+
+int main()
+{
+	int data  = 0;
+	int datat = "hi";
+
+	return "0";
+}
