@@ -31,6 +31,8 @@ void horizon_dealloc_lexer(HorizonLexer *lexer)
 {
     if (!lexer)
     {
+        compiler_warning("Lexer: Failed to deallocate NULL object");
+
         return;
     }
 
@@ -41,11 +43,15 @@ void horizon_lexer_advance(HorizonLexer *lexer, int z)
 {
     if (!lexer)
     {
+        compiler_warning("Lexer: Failed to advance NULL object");
+
         return;
     }
 
     if ((lexer->position + z) > lexer->srclength)
     {
+        compiler_warning("Lexer: Advanced `0` because increment exceeded size");
+
         return;
     }
 
@@ -57,11 +63,15 @@ void horizon_lexer_devance(HorizonLexer *lexer, int z)
 {
     if (!lexer)
     {
+        compiler_warning("Lexer: Failed to devance NULL object");
+
         return;
     }
 
     if ((lexer->position - z) < 0)
     {
+        compiler_warning("Lexer: Devanced `0` because decrement went under 0");
+
         return;
     }
 
@@ -73,11 +83,15 @@ char horizon_lexer_peek(HorizonLexer *lexer, int z)
 {
     if (!lexer)
     {
+        compiler_warning("Lexer: Peek returned `0` because of NULL object");
+
         return '\0';
     }
 
     if (z > lexer->srclength || z < 0)
     {
+        compiler_warning("Lexer: Peek returned `0` because increment exceeded size");
+
         return '\0';
     }
 
@@ -88,6 +102,8 @@ void horizon_lexer_skip(HorizonLexer *lexer)
 {
     if (!lexer)
     {
+        compiler_warning("Lexer: Failed to skip because of NULL object");
+
         return;
     }
 
@@ -103,7 +119,9 @@ HorizonToken *horizon_lexer_next_token(HorizonLexer *lexer)
 {
     if (!lexer)
     {
-        compiler_error("Failed to get next token in lexer");
+        compiler_error("Lexer: Failed to get next token because of NULL object");
+
+        return NULL;
     }
 
     horizon_lexer_skip(lexer);

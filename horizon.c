@@ -15,7 +15,9 @@ char *compiler_get_filedata(const char *filename)
 
     if (!file)
     {
-        compiler_error("Failed to open: %s", filename);
+        compiler_error("Compiler: Failed to open: %s", filename);
+
+        return NULL;
     }
 
     char *__buffer = calloc(1, sizeof(char));
@@ -42,7 +44,7 @@ int compiler_get_filesize(const char *filename)
 
     if (!file)
     {
-        compiler_debug("Failed to get file size: %s", filename);
+        compiler_warning("Compiler: Failed to get file size: %s", filename);
 
         return 0;
     }
@@ -62,7 +64,9 @@ HorizonCompiler *compiler_bootup(const char *filename)
 
     if (!compiler)
     {
-        compiler_error("Failed to bootup compiler");
+        compiler_error("Compiler: Failed to bootup");
+
+        return NULL;
     }
 
     compiler->srcname   = filename;
@@ -111,6 +115,8 @@ void horizon_compiler_write_asm(const char *srcname, HorizonCodeGen *codegen)
 
     if (!file)
     {
+        compiler_warning("Compiler: ASM Output file failed to open");
+
         return;
     }
 
@@ -123,7 +129,9 @@ int compiler_compile(HorizonCompiler *compiler)
 {
     if (!compiler)
     {
-        compiler_error("Compiler is NULL");
+        compiler_error("Compiler: Failed to run compilation because of NULL object");
+
+        return 1;
     }
 
     /* First convert srcdata into token array */
