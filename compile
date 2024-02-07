@@ -1,0 +1,32 @@
+#!/bin/bash
+
+clear
+
+files=`ls ./*.c`
+
+rm -rf build
+
+echo "Creating build directory..."
+
+mkdir -p build
+
+echo "Compiling src tree..."
+
+for file in $files
+do
+	echo "Compiling: $file"
+
+	gcc -c -g -Wno-discarded-qualifiers $file -o build/$file.o
+done
+
+echo "Linking executable..."
+
+gcc -g build/* -o horizon
+
+echo "Running executable on tests..."
+
+./horizon hello.hrz
+
+echo "Running compiled file..."
+
+./runasm
