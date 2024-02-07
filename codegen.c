@@ -12,6 +12,8 @@ HorizonCodeGen *horizon_alloc_codegen()
 
     if (!codegen)
     {
+        compiler_error("CodeGen: Failed to allocate codegen object");
+
         return NULL;
     }
 
@@ -27,6 +29,8 @@ HorizonCodeGenDataSeg *horizon_alloc_codegen_data_seg(int type, char *name, char
 
     if (!data_seg)
     {
+        compiler_error("CodeGen: Failed to allocate data_segment object");
+
         return NULL;
     }
 
@@ -44,6 +48,8 @@ HorizonCodeGenMainSeg *horizon_alloc_codegen_main_seg(char *code)
 
     if (!main_seg)
     {
+        compiler_error("CodeGen: Failed to allocate main_segment object");
+        
         return NULL;
     }
 
@@ -57,6 +63,8 @@ void horizon_codegen_run(HorizonCodeGen *codegen, HorizonASTRootNode *root)
 {
     if (!codegen || !root)
     {
+        compiler_error("CodeGen: Failed to generate machine code because of NULL object(s)");
+        
         return;
     }
 

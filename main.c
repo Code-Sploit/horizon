@@ -5,7 +5,7 @@ int main(int argc, char** argv)
 {
     if (argc < 2)
     {
-        compiler_error("No target file specified!");
+        compiler_error("Compiler: No target file specified!");
     }
 
     for (int i = 1; i < argc; i++)

@@ -11,7 +11,7 @@ HorizonParser *horizon_alloc_parser()
 
     if (!parser)
     {
-        compiler_error("Failed to allocate parser");
+        compiler_error("Parser: Failed to allocate parser");
     }
 
     return parser;
@@ -21,6 +21,8 @@ void horizon_dealloc_parser(HorizonParser *parser)
 {
     if (!parser)
     {
+        compiler_warning("Parser: Failed to deallocate parser because of NULL object");
+
         return;
     }
 
@@ -31,6 +33,8 @@ void horizon_parser_set_tokens(HorizonParser *parser, HorizonToken **tokens, int
 {
     if (!parser || !tokens || token_count == 0)
     {
+        compiler_warning("Parser: Failed to set tokens because of NULL object(s)");
+
         return;
     }
 
@@ -47,6 +51,8 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
 {
     if (!parser)
     {
+        compiler_error("Parser: Failed to run because of NULL object");
+
         return;
     }
 
@@ -87,6 +93,8 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
 
                         if (!name_token)
                         {
+                            compiler_warning("Parser: Failed to get name_token in function because of NULL object");
+
                             return;
                         }
 
@@ -109,6 +117,8 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
 
                         if (!name_token || !value_token)
                         {
+                            compiler_warning("Parser: Failed to get name_token/value_token in variable because of NULL object(s)");
+
                             return;
                         }
 
@@ -135,6 +145,8 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
 
                         if (!name_token)
                         {
+                            compiler_warning("Parser: Failed to get name_token in function because of NULL object");
+
                             return;
                         }
 
@@ -157,6 +169,8 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
 
                         if (!name_token || !value_token)
                         {
+                            compiler_warning("Parser: Failed to get name_token/value_token in function because of NULL object(s)");
+
                             return;
                         }
 
@@ -179,6 +193,8 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
 
                     if (!library_token)
                     {
+                        compiler_warning("Parser: Failed to get library_token in require statement because of NULL object");
+
                         return;
                     }
 
@@ -201,6 +217,8 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
 
                     if (!value_token)
                     {
+                        compiler_warning("Parser: Failed to get value_token in return statement because of NULL object");
+
                         return;
                     }
 
@@ -214,7 +232,7 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
                 }
                 else
                 {
-                    compiler_error("Invalid keyword");
+                    compiler_error("Parser: Invalid keyword");
                 }
             }
 

@@ -23,10 +23,10 @@ echo "Linking executable..."
 
 gcc -g build/* -o horizon
 
-echo "Running executable on tests..."
+echo -e "Running executable on tests...\n"
 
 ./horizon hello.hrz
 
-echo "Running compiled file..."
+echo -e "\nRunning compiled file..."
 
 ./runasm

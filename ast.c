@@ -11,7 +11,7 @@ HorizonASTRootNode *horizon_alloc_ast_root_node()
 
     if (!root)
     {
-        compiler_error("Failed to allocate root AST node");
+        compiler_error("AST: Failed to allocate root node");
     }
 
     root->node_count = 0;
@@ -25,7 +25,7 @@ HorizonASTNode *horizon_alloc_ast_function(char *fname)
 
     if (!node)
     {
-        compiler_error("Failed to allocate AST node");
+        compiler_error("AST: Failed to allocate node");
     }
 
     node->type = NODE_TYPE_FUNCTION;
@@ -41,7 +41,7 @@ HorizonASTNode *horizon_alloc_ast_ret(char *from, char *to)
 
     if (!node)
     {
-        compiler_error("Failed to allocate AST node");
+        compiler_error("AST: Failed to allocate node");
     }
 
     node->type = NODE_TYPE_RETURN;
@@ -58,7 +58,7 @@ HorizonASTNode *horizon_alloc_ast_declaration(char *name, char *value, char *typ
 
     if (!node)
     {
-        compiler_error("Failed to allocate AST node");
+        compiler_error("AST: Failed to allocate node");
     }
 
     node->type = NODE_TYPE_DECLARATION;
@@ -76,7 +76,7 @@ HorizonASTNode *horizon_alloc_ast_call(char *target)
 
     if (!node)
     {
-        compiler_error("Failed to allocate AST node");
+        compiler_error("AST: Failed to allocate node");
     }
 
     node->type = NODE_TYPE_CALL;
@@ -92,7 +92,7 @@ HorizonASTNode *horizon_alloc_ast_require(char *library)
 
     if (!node)
     {
-        compiler_error("Failed to allocate AST node");
+        compiler_error("AST: Failed to allocate node");
     }
 
     node->type = NODE_TYPE_REQUIRE;
@@ -108,7 +108,7 @@ HorizonASTNode *horizon_alloc_ast_exit(char *value)
 
     if (!node)
     {
-        compiler_error("Failed to allocate AST node");
+        compiler_error("AST: Failed to allocate node");
     }
 
     node->type = NODE_TYPE_EXIT;
@@ -122,6 +122,8 @@ void horizon_dealloc_ast_node(HorizonASTNode *node)
 {
     if (!node)
     {
+        compiler_warning("AST: Failed to deallocate NULL object");
+
         return;
     }
 
@@ -132,6 +134,8 @@ char *horizon_ast_node_to_template(HorizonASTNode *node)
 {
     if (!node)
     {
+        compiler_warning("AST: Failed to get template of NULL object");
+
         return "";
     }
 
@@ -213,6 +217,8 @@ char *horizon_ast_node_to_template(HorizonASTNode *node)
 
         }
     }
+
+    compiler_warning("AST: Failed to get template of invalid object");
 
     return "";
 }

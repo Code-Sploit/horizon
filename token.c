@@ -11,7 +11,7 @@ HorizonToken *horizon_alloc_token(HorizonTokenType type, const char *value)
 
     if (!token)
     {
-        compiler_error("Failed to initialize token. Type: %d Value: %s", type, value);
+        compiler_error("Token: Failed to allocate token");
     }
 
     token->type  = type;
@@ -24,6 +24,8 @@ void horizon_dealloc_token(HorizonToken *token)
 {
     if (!token)
     {
+        compiler_warning("Token: Failed to deallocate token because of NULL object");
+        
         return;
     }
 
