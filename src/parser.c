@@ -141,7 +141,7 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
 
                         HorizonToken *name_token  = parser->tokens[i + 1];
 
-                        a += 3;
+                        a += 2;
 
                         if (!name_token)
                         {
@@ -165,7 +165,7 @@ void horizon_parser_run(HorizonParser *parser, HorizonASTRootNode *ast)
                         HorizonToken *name_token  = parser->tokens[i + 1];
                         HorizonToken *value_token = parser->tokens[i + 2];
 
-                        a += 3;
+                        a += 2;
 
                         if (!name_token || !value_token)
                         {

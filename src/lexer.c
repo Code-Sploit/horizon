@@ -136,15 +136,20 @@ HorizonToken *horizon_lexer_next_token(HorizonLexer *lexer)
 
     /* Alpha character */
 
-    if (isalpha(lexer->index))
+    if (isalpha(lexer->index) || lexer->index == '_')
     {
-        while (isalpha(horizon_lexer_peek(lexer, 0)))
+        int passed_first_char = 0;
+
+        while (isalpha(horizon_lexer_peek(lexer, 0)) || isdigit(horizon_lexer_peek(lexer, 0)) && passed_first_char == 1
+                                                     || horizon_lexer_peek(lexer, 0) == '_')
         {
             identifier = realloc(identifier, strlen(identifier) + 2);
 
             strcat(identifier, (char[]) {lexer->index, 0});
 
             horizon_lexer_advance(lexer, 1);
+
+            passed_first_char = 1;
         }
 
         return horizon_alloc_token(horizon_token_get_type(identifier), identifier);
@@ -163,7 +168,7 @@ HorizonToken *horizon_lexer_next_token(HorizonLexer *lexer)
             horizon_lexer_advance(lexer, 1);
         }
 
-        return horizon_alloc_token(horizon_token_get_type(digit), identifier);
+        return horizon_alloc_token(horizon_token_get_type(digit), digit);
     }
 
     /* Operator */

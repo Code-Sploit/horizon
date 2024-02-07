@@ -50,7 +50,7 @@ char *horizon_token_id_to_string(HorizonTokenType type)
 
 HorizonTokenType horizon_token_get_type(char *data)
 {
-    if (isalpha(data[0]))
+    if (isalpha(data[0]) || data[0] == '_')
     {
         if (strcmp(data, "require") == 0)
         {

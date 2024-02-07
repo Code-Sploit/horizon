@@ -19,3 +19,7 @@ install:
 prepare:
 	chmod +x scripts/compile
 	chmod +x scripts/tests
+
+run:
+	make
+	build/horizon tests/hello.hrz

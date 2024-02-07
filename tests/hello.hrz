@@ -3,7 +3,7 @@
 int main()
 {
 	int data  = 0;
-	int datat = "hi";
+	str datat = "hi";
 
-	return "0";
+	return 0;
 }

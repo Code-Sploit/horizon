@@ -106,14 +106,20 @@ void horizon_codegen_run(HorizonCodeGen *codegen, HorizonASTRootNode *root)
 
             if (strcmp(root->nodes[i]->function.fname, "main") == 0)
             {
+                const char *_start = "_start:\n";
+
+                codegen->main_segment->size = strlen(_start);
+                codegen->main_segment->code = calloc(1, sizeof(char));
+
+                codegen->main_segment->code = realloc(codegen->main_segment->code, codegen->main_segment->size);
+
+                strcat(codegen->main_segment->code, _start);
+
                 for (int j = i; j < root->node_count; j++)
                 {
-                    codegen->main_segment->size = 0;
-                    codegen->main_segment->code = calloc(1, sizeof(char));
-
                     if (root->nodes[j]->type == NODE_TYPE_EXIT)
                     {
-                        const char *template = "_start:\n\tmov rax, 60\n\tmov rdi, %s\n\tsyscall";
+                        const char *template = "\tmov rax, 60\n\tmov rdi, %s\n\tsyscall";
 
                         char *buffer;
 
@@ -134,6 +140,8 @@ void horizon_codegen_run(HorizonCodeGen *codegen, HorizonASTRootNode *root)
             }
         }
     }
+
+    //printf("%s\n", codegen->main_segment->code);
 
     /* Generate final code */
 
